@@ -1,17 +1,34 @@
 <?php
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @version  3.2.14
+ * @author   Taylor Otwell <taylorotwell@gmail.com>
+ * @link     http://laravel.com
+ */
 
-use Illuminate\Http\Request;
-
+// --------------------------------------------------------------
+// Tick... Tock... Tick... Tock...
+// --------------------------------------------------------------
 define('LARAVEL_START', microtime(true));
 
-// Determine if the application is in maintenance mode...
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
-    require $maintenance;
-}
+// --------------------------------------------------------------
+// Indicate that the request is from the web.
+// --------------------------------------------------------------
+$web = true;
 
-// Register the Composer autoloader...
-require __DIR__.'/../vendor/autoload.php';
+// --------------------------------------------------------------
+// Set the core Laravel path constants.
+// --------------------------------------------------------------
+require '../paths.php';
 
-// Bootstrap Laravel and handle the request...
-(require_once __DIR__.'/../bootstrap/app.php')
-    ->handleRequest(Request::capture());
+// --------------------------------------------------------------
+// Unset the temporary web variable.
+// --------------------------------------------------------------
+unset($web);
+
+// --------------------------------------------------------------
+// Launch Laravel.
+// --------------------------------------------------------------
+require path('sys').'laravel.php';
